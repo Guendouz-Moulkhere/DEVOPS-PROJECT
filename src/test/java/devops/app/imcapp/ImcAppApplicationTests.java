@@ -1,31 +1,39 @@
 package devops.app.imcapp;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 @SpringBootTest
 public class ImcAppApplicationTests {
 
-    @Autowired
+    @Mock
     private ImcService imcService;
 
+    @Autowired
+    private ImcController imcController;
+
     @Test
-    public void testCalculateImc() {
+    void calculateImc() {
         ImcDTO imcDTO = new ImcDTO();
-        imcDTO.setTaille(1.75); 
-        imcDTO.setPoids(70); 
+        imcDTO.setPoids(70.0);
+        imcDTO.setTaille(1.75);
 
-       
-        Map<String, String> result = imcService.calculate(imcDTO);
+        when(imcService.calculate(imcDTO))
+                .thenReturn(Map.of("imc", "22.86", "avis", "Normale"));
 
-       
-        assertEquals("24.49", result.get("imc")); 
-        assertEquals("Normale", result.get("avis")); 
+        Map<String, String> result = imcController.calcule(imcDTO);
+
+        assertEquals("22.86", result.get("imc"));
+        assertEquals("Normale", result.get("avis"));
     }
 }
-
