@@ -16,7 +16,11 @@ pipeline {
                 bat 'mvn clean install'
             }
         }
-      
+      stage('Run Unit Tests') {
+            steps {
+                bat 'mvn test'
+            }
+        }
 
         stage('Build Docker Image') {
             steps {
