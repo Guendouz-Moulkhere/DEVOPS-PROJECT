@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('SCM Checkout') {
             steps {
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/mrtalonbourgeau/app']])
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Guendouz-Moulkhere/DEVOPS-PROJECT']])
             }
         }
         stage('Build Maven Project') {
@@ -19,16 +19,16 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t  mrtalonbourgeau/app .'
+                bat 'docker build -t  gmoulkhere/app .'
             }
         }
         stage('Push Docker Image to Hub') {
             steps {
                 script {
                     withCredentials([string(credentialsId: 'DockerHubSecret', variable: 'DockerHubSecret')]) {
-                        bat 'docker login -u mrtalonbourgeau -p ${DockerHubSecret}'
+                        bat 'docker login -u gmoulkhere -p ${DockerHubSecret}'
                     }
-                    bat 'docker push mrtalonbourgeau/app'
+                    bat 'docker push gmoulkhere/app'
                 }
             }
         }
