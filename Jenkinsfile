@@ -25,8 +25,8 @@ pipeline {
         stage('Push Docker Image to Hub') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'DockerHubPwd', variable: 'DockerHubSecret')]) {
-                        bat 'docker login -u gmoulkhere -p ${DockerHubSecret}'
+                    withCredentials([string(credentialsId: 'DockerHubSecret', variable: 'DockerHubPwd')]) {
+                        bat 'docker login -u gmoulkhere -p projetdevops'
                     }
                     bat 'docker push gmoulkhere/app'
                 }
