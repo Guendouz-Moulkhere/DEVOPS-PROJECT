@@ -28,12 +28,15 @@ public class ImcAppApplicationTests {
         imcDTO.setPoids(70.0);
         imcDTO.setTaille(1.75);
 
+        // Mocking the service response
         when(imcService.calculate(imcDTO))
                 .thenReturn(Map.of("imc", "22.86", "avis", "Normale"));
 
+        // Invoking the controller method
         Map<String, String> result = imcController.calcule(imcDTO);
 
-        assertEquals("22.86", result.get("imc"));
+        // Checking the response
+        assertEquals("22.86", result.get("imc")); // Expected value rounded to 2 decimal places
         assertEquals("Normale", result.get("avis"));
     }
 }
