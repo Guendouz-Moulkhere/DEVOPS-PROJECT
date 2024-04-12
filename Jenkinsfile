@@ -16,12 +16,7 @@ pipeline {
                 bat 'mvn clean install'
             }
         }
-         stage('Run Unit Tests') {
-    steps {
-        bat 'mvn clean test'
-        junit 'target/surefire-reports/*.xml'
-    }
-}
+      
 
         stage('Build Docker Image') {
             steps {
