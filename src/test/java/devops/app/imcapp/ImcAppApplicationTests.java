@@ -9,7 +9,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-public class ImcServiceTest {
+public class ImcAppApplicationTests {
 
     @Autowired
     private ImcService imcService;
