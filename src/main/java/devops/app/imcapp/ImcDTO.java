@@ -10,6 +10,11 @@ public class ImcDTO {
 	private double taille;
 	private double poids;
 	
+	public ImcDTO(double taille, double poids) {
+		this.taille = taille;
+		this.poids = poids;
+	}
+	
 	public double getTaille() {
 		return this.taille;
 	}
