@@ -17,10 +17,12 @@ pipeline {
             }
         }
          stage('Run Unit Tests') {
-            steps {
-                bat 'mvn test'
-            }
-        }
+    steps {
+        bat 'mvn clean test'
+        junit 'target/surefire-reports/*.xml'
+    }
+}
+
         stage('Build Docker Image') {
             steps {
                 bat 'docker build -t  gmoulkhere/app .'
