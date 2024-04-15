@@ -8,7 +8,10 @@ pipeline {
     stages {
         stage('SCM Checkout') {
             steps {
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Guendouz-Moulkhere/DEVOPS-PROJECT']])
+                checkout scmGit(
+                    branches: [[name: '*/main']],
+                    extensions: [],
+                    userRemoteConfigs: [[url: 'https://github.com/Guendouz-Moulkhere/DEVOPS-PROJECT']])
             }
         }
         stage('Build Maven Project') {
@@ -30,7 +33,9 @@ pipeline {
         stage('Push Docker Image to Hub') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'DockerHubSecret', variable: 'DockerHubPwd')]) {
+                    withCredentials(
+                        [string(credentialsId: 'DockerHubSecret',
+                                            variable: 'DockerHubPwd')]) {
                         bat 'docker login -u gmoulkhere -p projetdevops'
                     }
                     bat 'docker push gmoulkhere/app'
