@@ -27,7 +27,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t  gmoulkhere/app .'
+                bat 'docker build -t  projetdesession/app .'
             }
         }
         stage('Push Docker Image to Hub') {
@@ -36,9 +36,9 @@ pipeline {
                     withCredentials(
                         [string(credentialsId: 'DockerHubSecret',
                                             variable: 'DockerHubPwd')]) {
-                        bat 'docker login -u gmoulkhere -p projetdevops'
+                        bat 'docker login -u ${DockerHubSecret} -p ${DockerHubPwd}'
                     }
-                    bat 'docker push gmoulkhere/app'
+                    bat 'docker push projetdesession/app'
                 }
             }
         }
